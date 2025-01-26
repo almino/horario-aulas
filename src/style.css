@@ -1,3 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+body {
+  @apply max-w-svw;
+  /* @apply px-2 py-2; */
+}
