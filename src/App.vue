@@ -1,10 +1,36 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import { DateTime } from "luxon";
+import { DateTime, Settings } from "luxon";
 import { invoke } from "@tauri-apps/api/core";
 
-const today = reactive(DateTime.now());
-const startDay = reactive(today.startOf("week"));
+const wSettings = {
+  firstDay: 7,
+  minimalDays: 1,
+  weekend: [6, 7],
+};
+
+Settings.defaultWeekSettings = wSettings;
+
+const today = DateTime.local({locale: "pt-BR"});
+const startDay = reactive(
+  today.startOf("week")
+);
+const dayNumber = parseInt(today.toFormat("c"));
+
+if (wSettings.weekend.includes(dayNumber)) {
+  startDay.plus({ week: 1 });
+}
+
+const jsDays = [];
+
+for (let i = 0; i < 7; i++) {
+  let d = startDay.plus({ days: i });
+  let n = parseInt(d.toFormat("c"));
+  if (wSettings.weekend.includes(n)) continue;
+  jsDays.push(d);
+}
+
+const days = ref(jsDays);
 const weekNumber = reactive(today.weekNumber);
 </script>
 
@@ -14,6 +40,7 @@ const weekNumber = reactive(today.weekNumber);
   >
     <div class="col-span-2 text-center">
       {{ today.toFormat("DDDD") }}
+      <!-- {{ today.toFormat("c") }} -->
     </div>
     <div
       class="dias gap-y-2 grid items-center place-items-stretch font-bold text-right"
@@ -21,19 +48,15 @@ const weekNumber = reactive(today.weekNumber);
       <div class="font-thin text-left text-xs">
         nº. {{ weekNumber }}
       </div>
-      <div>
+      <div v-for="d in days">
         <div
           class="text-gray-400 text-normal text-xs"
         >
-          {{ startDay.toFormat("dd") }}
-          {{ startDay.toFormat("LLL") }}
+          {{ d.toFormat("dd") }}
+          {{ d.toFormat("LLL") }}
         </div>
-        seg
+        {{ d.toFormat("ccc") }}
       </div>
-      <div>ter</div>
-      <div>qua</div>
-      <div>qui</div>
-      <div>sex</div>
     </div>
     <div
       class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
