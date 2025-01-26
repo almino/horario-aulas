@@ -1,5 +1,6 @@
 {
   "recommendations": [
+    "bradlc.vscode-tailwindcss",
     "lafe.contextualduplicate",
     "rust-lang.rust-analyzer",
     "sleistner.vscode-fileutils",
