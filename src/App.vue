@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive } from "vue";
+import { DateTime } from "luxon";
 import { invoke } from "@tauri-apps/api/core";
 
 const greetMsg = ref("");
 const name = ref("");
+const weekNumber = reactive(
+  DateTime.fromJSDate(new Date()).weekNumber
+);
 
 async function greet() {
   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -20,7 +24,9 @@ async function greet() {
     <div
       class="dias gap-y-2 grid place-items-stretch font-bold text-right"
     >
-      <div>&nbsp;</div>
+      <div class="font-thin text-left text-xs">
+        nº. {{ weekNumber }}
+      </div>
       <div>seg</div>
       <div>ter</div>
       <div>qua</div>
@@ -54,25 +60,25 @@ async function greet() {
 
 <style scoped>
 main.grid {
-  grid-template-columns: min-content auto;
+  grid-template-columns: 3em auto;
 
   & > .dias,
   & > .turnos {
-    grid-template-rows: min-content repeat(
-        5,
-        auto
-      );
+    grid-template-rows: 1em repeat(5, auto);
   }
 }
 
 .dias > :first-child {
-  visibility: hidden;
+  align-self: end;
+  font-weight: normal;
+  /* visibility: hidden; */
 }
 
 .turnos {
   grid-template-columns: repeat(3, min-content);
 
   & > :nth-child(-n + 3) {
+    align-self: end;
     font-weight: bold;
   }
 }
