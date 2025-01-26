@@ -9,6 +9,14 @@ const wSettings = {
   weekend: [6, 7],
 };
 
+const jsTurnos = [
+  "manhã",
+  "tarde",
+  // "noite",
+];
+const lenTurnos = ref(jsTurnos.length);
+const turnos = ref(jsTurnos);
+
 Settings.defaultWeekSettings = wSettings;
 
 const today = DateTime.local({ locale: "pt-BR" });
@@ -60,24 +68,23 @@ const weekNumber = reactive(today.weekNumber);
     <div
       class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
     >
-      <div>manhã</div>
-      <div>tarde</div>
-      <div>noite</div>
+      <div
+        v-for="t in turnos"
+        class="turno font-bold"
+        :style="{ alignSelf: 'end' }"
+      >
+        {{ t }}
+      </div>
       <div>APS1</div>
       <div>DHP1</div>
-      <div></div>
       <div>Genitourinário</div>
       <div>Genitourinário</div>
-      <div></div>
       <div>Genitourinário</div>
       <div>Genitourinário</div>
-      <div></div>
       <div>Genitourinário</div>
       <div>Genitourinário</div>
-      <div></div>
       <div>Genitourinário</div>
       <div>Genitourinário</div>
-      <div></div>
     </div>
   </main>
 </template>
@@ -89,7 +96,10 @@ main.grid {
 
   & > .dias,
   & > .turnos {
-    grid-template-rows: 1em repeat(v-bind('lenDays'), 1fr);
+    grid-template-rows: 1em repeat(
+        v-bind("lenDays"),
+        1fr
+      );
   }
 }
 
@@ -100,11 +110,9 @@ main.grid {
 }
 
 .turnos {
-  grid-template-columns: repeat(3, min-content);
-
-  & > :nth-child(-n + 3) {
-    align-self: end;
-    font-weight: bold;
-  }
+  grid-template-columns: repeat(
+    v-bind("lenTurnos"),
+    min-content
+  );
 }
 </style>
