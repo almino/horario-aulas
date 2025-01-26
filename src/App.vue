@@ -11,10 +11,8 @@ const wSettings = {
 
 Settings.defaultWeekSettings = wSettings;
 
-const today = DateTime.local({locale: "pt-BR"});
-const startDay = reactive(
-  today.startOf("week")
-);
+const today = DateTime.local({ locale: "pt-BR" });
+const startDay = reactive(today.startOf("week"));
 const dayNumber = parseInt(today.toFormat("c"));
 
 if (wSettings.weekend.includes(dayNumber)) {
@@ -31,6 +29,7 @@ for (let i = 0; i < 7; i++) {
 }
 
 const days = ref(jsDays);
+const lenDays = ref(jsDays.length);
 const weekNumber = reactive(today.weekNumber);
 </script>
 
@@ -50,7 +49,7 @@ const weekNumber = reactive(today.weekNumber);
       </div>
       <div v-for="d in days">
         <div
-          class="text-gray-400 text-normal text-xs"
+          class="text-gray-400 font-normal text-xs"
         >
           {{ d.toFormat("dd") }}
           {{ d.toFormat("LLL") }}
@@ -90,7 +89,7 @@ main.grid {
 
   & > .dias,
   & > .turnos {
-    grid-template-rows: 1em repeat(5, 1fr);
+    grid-template-rows: 1em repeat(v-bind('lenDays'), 1fr);
   }
 }
 
