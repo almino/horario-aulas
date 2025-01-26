@@ -1,6 +1,8 @@
 {
   "recommendations": [
+    "lafe.contextualduplicate",
     "rust-lang.rust-analyzer",
+    "sleistner.vscode-fileutils",
     "tauri-apps.tauri-vscode",
     "Vue.volar",
   ]
