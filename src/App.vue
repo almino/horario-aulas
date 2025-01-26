@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { computed, ref, reactive } from "vue";
 import { DateTime, Settings } from "luxon";
 import { invoke } from "@tauri-apps/api/core";
 
@@ -39,60 +39,92 @@ for (let i = 0; i < 7; i++) {
 const days = ref(jsDays);
 const lenDays = ref(jsDays.length);
 const weekNumber = reactive(today.weekNumber);
+
+const header = computed(() => {
+  let ini = jsDays[0];
+  let end = jsDays[jsDays.length - 1];
+
+  if (ini.year != end.year) {
+    return `${ini.toFormat("D")} a
+    ${end.toFormat("D")}`;
+  }
+
+  if (ini.month != end.month) {
+    let i = ini
+      .toFormat("D")
+      .replace(`/${ini.toFormat("yyyy")}`, "");
+    let e = end
+      .toFormat("D")
+      .replace(`/${end.toFormat("yyyy")}`, "");
+
+    return `${i} a ${e}`;
+  }
+
+  return `${ini.toFormat("dd")} a
+  ${end.toFormat("dd")} de
+  ${end.toFormat("LLLL")}`;
+});
 </script>
 
 <template>
   <main
-    class="gap-2 grid grid-cols-2 h-lvh max-w-svw px-2 py-2 w-swv"
+    class="gap-2 grid h-lvh max-w-svw place-items-stretch px-2 py-2 w-swv"
   >
-    <div class="col-span-2 text-center">
-      {{ today.toFormat("DDDD") }}
+    <header class="text-center">
+      <strong>semana {{ weekNumber }}</strong
+      >:
+      {{ header }}
       <!-- {{ today.toFormat("c") }} -->
-    </div>
-    <div
-      class="dias gap-y-2 grid items-center place-items-stretch font-bold text-right"
-    >
-      <div class="font-thin text-left text-xs">
-        nº. {{ weekNumber }}
-      </div>
-      <div v-for="d in days">
-        <div
-          class="text-gray-400 font-normal text-xs"
-        >
-          {{ d.toFormat("dd") }}
-          {{ d.toFormat("LLL") }}
-        </div>
-        {{ d.toFormat("ccc") }}
-      </div>
-    </div>
-    <div
-      class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
-    >
+    </header>
+    <section class="gap-2 grid grid-cols-2">
       <div
-        v-for="t in turnos"
-        class="turno font-bold"
-        :style="{ alignSelf: 'end' }"
+        class="dias gap-y-2 grid items-center place-items-stretch font-bold text-right"
       >
-        {{ t }}
+        <div class="font-thin text-left text-xs">
+          <!-- nº. {{ weekNumber }} -->
+        </div>
+        <div v-for="d in days">
+          <div
+            class="text-gray-400 font-normal text-xs"
+          >
+            {{ d.toFormat("dd") }}
+            {{ d.toFormat("LLL") }}
+          </div>
+          {{ d.toFormat("ccc") }}
+        </div>
       </div>
-      <div>APS1</div>
-      <div>DHP1</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-      <div>Genitourinário</div>
-    </div>
+      <div
+        class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
+      >
+        <div
+          v-for="t in turnos"
+          class="turno font-bold"
+          :style="{ alignSelf: 'end' }"
+        >
+          {{ t }}
+        </div>
+        <div>APS1</div>
+        <div>DHP1</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+        <div>Genitourinário</div>
+      </div>
+    </section>
   </main>
 </template>
 
 <style scoped>
 main.grid {
+  grid-template-rows: max-content auto;
+}
+
+section.grid {
   grid-template-columns: 3em auto;
-  grid-template-rows: min-content auto;
 
   & > .dias,
   & > .turnos {
