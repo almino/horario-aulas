@@ -1,9 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, reactive } from "vue";
-import { DateTime, Settings } from "luxon";
-import { invoke } from "@tauri-apps/api/core";
+import {
+  DateTime,
+  Settings,
+  WeekdayNumbers,
+  WeekSettings,
+} from "luxon";
+// import { invoke } from "@tauri-apps/api/core";
 
-const wSettings = {
+const wSettings: WeekSettings = {
   firstDay: 7,
   minimalDays: 1,
   weekend: [6, 7],
@@ -21,24 +26,26 @@ Settings.defaultWeekSettings = wSettings;
 
 const today = DateTime.local({ locale: "pt-BR" });
 const startDay = reactive(today.startOf("week"));
-const dayNumber = parseInt(today.toFormat("c"));
+const dayNumber: WeekdayNumbers = parseInt(
+  today.toFormat("c")
+) as WeekdayNumbers;
 
 if (wSettings.weekend.includes(dayNumber)) {
   startDay.plus({ week: 1 });
 }
 
-const jsDays = [];
+const jsDays: DateTime[] = [];
 
 for (let i = 0; i < 7; i++) {
   let d = startDay.plus({ days: i });
-  let n = parseInt(d.toFormat("c"));
+  let n = parseInt(d.toFormat("c")) as WeekdayNumbers;
   if (wSettings.weekend.includes(n)) continue;
   jsDays.push(d);
 }
 
 const days = ref(jsDays);
 const lenDays = ref(jsDays.length);
-const weekNumber = reactive(today.weekNumber);
+const weekNumber = ref(today.weekNumber);
 
 const header = computed(() => {
   let ini = jsDays[0];
