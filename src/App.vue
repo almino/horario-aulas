@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
 import { computed, inject } from "vue";
-import WeekView from "./WeekView.vue";
+import WeekView from "./components/WeekView.vue";
 
 const days: DateTime[] = inject(
   "week-days"
@@ -36,15 +36,15 @@ const header = computed(() => {
 
 <template>
   <main
-    class="gap-2 grid h-lvh max-w-svw place-items-stretch px-2 py-2 w-swv"
+    class="grid h-lvh max-w-svw place-items-stretch w-swv"
   >
-    <header class="text-center">
+    <header class="bg-teal-700 p-2 shadow-dark-mild text-center text-white">
       <strong>
         semana
         {{ firstDay.weekNumber }} </strong
       >: {{ header }}
     </header>
-    <WeekView></WeekView>
+    <WeekView />
   </main>
 </template>
 

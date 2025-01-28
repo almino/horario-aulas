@@ -7,13 +7,24 @@ const days = inject("week-days") as DateTime[];
 const turnos = inject("turnos") as string[];
 const lenDays = ref(days.length);
 const lenTurnos = ref(turnos.length);
+
+const twDias = [
+  "border-gray-400",
+  "border-r-1",
+  "border-solid",
+  "font-bold",
+  "gap-y-2",
+  "grid",
+  "items-center",
+  "place-items-stretch",
+  "p-2",
+  "text-right",
+];
 </script>
 
 <template>
   <section class="gap-2 grid grid-cols-2">
-    <div
-      class="dias gap-y-2 grid items-center place-items-stretch font-bold text-right"
-    >
+    <div :class="['dias', ...twDias]">
       <div class="font-thin text-left text-xs">
         <!-- nº. {{ weekNumber }} -->
       </div>
@@ -53,11 +64,11 @@ const lenTurnos = ref(turnos.length);
 
 <style scoped>
 section.grid {
-  grid-template-columns: 3em auto;
+  grid-template-columns: 4em auto;
 
   & > .dias,
   & > .turnos {
-    grid-template-rows: 1em repeat(
+    grid-template-rows: 1.5em repeat(
         v-bind("lenDays"),
         1fr
       );
