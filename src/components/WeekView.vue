@@ -3,13 +3,17 @@ import { DateTime } from "luxon";
 import { inject, ref } from "vue";
 // import { invoke } from "@tauri-apps/api/core";
 
+const colors = inject("colors") as Record<
+  string,
+  string
+>;
 const days = inject("week-days") as DateTime[];
 const turnos = inject("turnos") as string[];
 const lenDays = ref(days.length);
 const lenTurnos = ref(turnos.length);
 
 const twDias = [
-  "border-gray-400",
+  colors.border,
   "border-r-1",
   "border-solid",
   "font-bold",

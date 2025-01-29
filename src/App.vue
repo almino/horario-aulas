@@ -2,6 +2,15 @@
 import { DateTime } from "luxon";
 import { computed, inject } from "vue";
 import WeekView from "./components/WeekView.vue";
+import colors from "./constants/colors";
+
+const twHeader = [
+  colors.bg,
+  "p-2",
+  "shadow-dark-mild",
+  "text-center",
+  "text-white",
+];
 
 const days: DateTime[] = inject(
   "week-days"
@@ -38,7 +47,7 @@ const header = computed(() => {
   <main
     class="grid h-lvh max-w-svw place-items-stretch w-swv"
   >
-    <header class="bg-teal-700 p-2 shadow-dark-mild text-center text-white">
+    <header :class="twHeader">
       <strong>
         semana
         {{ firstDay.weekNumber }} </strong
