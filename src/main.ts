@@ -1,17 +1,28 @@
 import { createApp } from "vue";
-
-// Vuetify
-import "vuetify/styles";
-import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
+import keys from "./constants/keys";
+import luxon from "./constants/luxon";
+import vuetify from "./vuetify";
 
 // Components
 import App from "./App.vue";
 
-const vuetify = createVuetify({
-  components,
-  directives,
-});
+/* ============================================ */
 
-createApp(App).use(vuetify).mount("#app");
+const app = createApp(App);
+app.use(vuetify);
+
+// (Object.keys(luxon) as (keyof typeof luxon)[]).forEach(key => {
+//   app.provide(key, luxon[key]);
+// });
+app.provide(keys.firstDay, luxon.firstDay);
+app.provide(keys.today, luxon.today);
+app.provide(keys.turnos, luxon.turnos);
+app.provide(keys.weekDays, luxon.weekDays);
+app.provide(
+  keys.weekSettings,
+  luxon.weekSettings
+);
+
+app.mount("#app");
+
+export default app;

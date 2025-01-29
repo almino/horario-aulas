@@ -1,0 +1,95 @@
+<script setup lang="ts">
+import { DateTime } from "luxon";
+import { inject, ref } from "vue";
+import keys from "~/constants/keys";
+// import { invoke } from "@tauri-apps/api/core";
+
+const colors = inject("colors") as Record<
+  string,
+  string
+>;
+const days = inject(keys.weekDays) as DateTime[];
+const turnos = inject(keys.turnos) as string[];
+const lenDays = ref(days.length);
+const lenTurnos = ref(turnos.length);
+
+const twDias = [
+  colors.border,
+  "border-r-1",
+  "border-solid",
+  "font-bold",
+  "gap-y-2",
+  "grid",
+  "items-center",
+  "place-items-stretch",
+  "p-2",
+  "text-right",
+];
+</script>
+
+<template>
+  <section class="gap-2 grid grid-cols-2">
+    <div :class="['dias', ...twDias]">
+      <div class="font-thin text-left text-xs">
+        <!-- nº. {{ weekNumber }} -->
+      </div>
+      <div v-for="d in days">
+        <div
+          class="text-gray-400 font-normal text-xs"
+        >
+          {{ d.toFormat("dd") }}
+          {{ d.toFormat("LLL") }}
+        </div>
+        {{ d.toFormat("ccc") }}
+      </div>
+    </div>
+    <div
+      class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
+    >
+      <div
+        v-for="t in turnos"
+        class="turno font-bold"
+        :style="{ alignSelf: 'end' }"
+      >
+        {{ t }}
+      </div>
+      <div>APS1</div>
+      <div>DHP1</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+      <div>Genitourinário</div>
+    </div>
+  </section>
+</template>
+
+<style scoped>
+section.grid {
+  grid-template-columns: 4em auto;
+
+  & > .dias,
+  & > .turnos {
+    grid-template-rows: 1.5em repeat(
+        v-bind("lenDays"),
+        1fr
+      );
+  }
+}
+
+.dias > :first-child {
+  align-self: end;
+  font-weight: normal;
+  /* visibility: hidden; */
+}
+
+.turnos {
+  grid-template-columns: repeat(
+    v-bind("lenTurnos"),
+    min-content
+  );
+}
+</style>
