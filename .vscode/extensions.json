@@ -1,10 +1,12 @@
 {
   "recommendations": [
     "bradlc.vscode-tailwindcss",
+    "denifer.mdi-vuetify-intellisense",
     "lafe.contextualduplicate",
     "rust-lang.rust-analyzer",
     "sleistner.vscode-fileutils",
     "tauri-apps.tauri-vscode",
     "Vue.volar",
+    "vuetifyjs.vuetify-vscode",
   ]
 }

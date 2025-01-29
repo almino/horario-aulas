@@ -1,7 +1,8 @@
+import "~/style.css";
 import { createApp } from "vue";
-import keys from "./constants/keys";
-import luxon from "./constants/luxon";
-import vuetify from "./vuetify";
+import keys from "~/constants/keys";
+import luxon from "~/constants/luxon";
+import vuetify from "~/vuetify";
 
 // Components
 import App from "./App.vue";

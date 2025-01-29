@@ -1,54 +1,47 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { DateTime } from "luxon";
-import { inject, ref } from "vue";
+import { inject, ref, useTemplateRef } from "vue";
 import keys from "~/constants/keys";
 // import { invoke } from "@tauri-apps/api/core";
 
-const colors = inject("colors") as Record<
-  string,
-  string
->;
 const days = inject(keys.weekDays) as DateTime[];
-const turnos = inject(keys.turnos) as string[];
 const lenDays = ref(days.length);
-const lenTurnos = ref(turnos.length);
+const jsTurnos = inject(keys.turnos) as string[];
+const lenTurnos = ref(jsTurnos.length);
+const elTurnos = useTemplateRef("turnos");
 
-const twDias = [
-  colors.border,
-  "border-r-1",
-  "border-solid",
-  "font-bold",
-  "gap-y-2",
-  "grid",
-  "items-center",
-  "place-items-stretch",
-  "p-2",
-  "text-right",
-];
+function onScroll(evt: WheelEvent) {
+  elTurnos.value.scrollLeft += evt.deltaY;
+}
 </script>
 
 <template>
-  <section class="gap-2 grid grid-cols-2">
-    <div :class="['dias', ...twDias]">
+  <v-container class="grid">
+    <div class="border-e-sm grid" id="dias">
       <div class="font-thin text-left text-xs">
         <!-- nº. {{ weekNumber }} -->
       </div>
-      <div v-for="d in days">
+      <div v-for="d in days" class="border-t-sm">
         <div
-          class="text-gray-400 font-normal text-xs"
+          class="font-weight-light text-caption text-disabled"
         >
           {{ d.toFormat("dd") }}
           {{ d.toFormat("LLL") }}
         </div>
-        {{ d.toFormat("ccc") }}
+        <span class="font-weight-medium">
+          {{ d.toFormat("ccc") }}
+        </span>
       </div>
     </div>
     <div
-      class="turnos gap-2 grid items-center place-items-stretch overflow-x-auto text-center"
+      class="grid"
+      id="turnos"
+      ref="turnos"
+      @wheel.prevent="onScroll"
     >
       <div
-        v-for="t in turnos"
-        class="turno font-bold"
+        v-for="t in jsTurnos"
+        class="font-bold border-b-sm turno"
         :style="{ alignSelf: 'end' }"
       >
         {{ t }}
@@ -64,32 +57,33 @@ const twDias = [
       <div>Genitourinário</div>
       <div>Genitourinário</div>
     </div>
-  </section>
+  </v-container>
 </template>
 
 <style scoped>
-section.grid {
+.v-container {
   grid-template-columns: 4em auto;
-
-  & > .dias,
-  & > .turnos {
-    grid-template-rows: 1.5em repeat(
-        v-bind("lenDays"),
-        1fr
-      );
-  }
 }
 
-.dias > :first-child {
-  align-self: end;
-  font-weight: normal;
-  /* visibility: hidden; */
+#dias,
+#turnos {
+  grid-template-rows: 1.5em repeat(
+      v-bind("lenDays"),
+      1fr
+    );
 }
 
-.turnos {
+#turnos {
   grid-template-columns: repeat(
     v-bind("lenTurnos"),
     min-content
   );
+  overflow-x: scroll;
+  overflow-y: none;
+  padding-top: 0.05rem;
+
+  & > * {
+    padding: 0 0.5em;
+  }
 }
 </style>
