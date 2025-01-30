@@ -19,9 +19,13 @@ function onScroll(evt: WheelEvent) {
   <v-container class="grid">
     <div class="border-e-sm grid" id="dias">
       <div class="font-thin text-left text-xs">
+        &nbsp;
         <!-- nº. {{ weekNumber }} -->
       </div>
-      <div v-for="d in days" class="border-t-sm">
+      <div
+        v-for="d in days"
+        class="dia border-t-sm"
+      >
         <div
           class="font-weight-light text-caption text-disabled"
         >
@@ -41,7 +45,7 @@ function onScroll(evt: WheelEvent) {
     >
       <div
         v-for="t in jsTurnos"
-        class="font-bold border-b-sm turno"
+        class="font-weight-medium border-b-sm text-center turno"
         :style="{ alignSelf: 'end' }"
       >
         {{ t }}
@@ -62,7 +66,7 @@ function onScroll(evt: WheelEvent) {
 
 <style scoped>
 .v-container {
-  grid-template-columns: 4em auto;
+  grid-template-columns: 3.4em auto;
 }
 
 #dias,
@@ -71,6 +75,14 @@ function onScroll(evt: WheelEvent) {
       v-bind("lenDays"),
       1fr
     );
+}
+
+#dias > .dia {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5em;
 }
 
 #turnos {
