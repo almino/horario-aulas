@@ -1,0 +1,52 @@
+{
+  "2025-02-03": [
+    {
+      "nomeCurto": "APS1",
+      "turno": "manhã"
+    },
+    {
+      "nomeCurto": "DHP1",
+      "turno": "tarde"
+    }
+  ],
+  "2025-02-04": [
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "manhã"
+    },
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "tarde"
+    }
+  ],
+  "2025-02-05": [
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "manhã"
+    },
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "tarde"
+    }
+  ],
+  "2025-02-06": [
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "manhã"
+    },
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "tarde"
+    }
+  ],
+  "2025-02-07": [
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "manhã"
+    },
+    {
+      "nomeCurto": "Genitourinário",
+      "turno": "tarde"
+    }
+  ]
+}
