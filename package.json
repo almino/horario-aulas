@@ -10,12 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@date-io/luxon": "^3.2.0",
     "@mdi/font": "^7.4.47",
+    "luxon": "^3.5.0",
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@types/luxon": "^3.4.2",
     "vite-plugin-vuetify": "^2.1.0",
     "vuetify": "^3.7.13"
   }

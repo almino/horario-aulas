@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   compatibilityDate: "2024-11-01",
+  css: ["~/assets/style.css"],
   devtools: { enabled: true },
   modules: [
     (_options, nuxt) => {
