@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-app>
     <AppBar />
     <v-navigation-drawer>
       <v-list>
@@ -11,5 +11,5 @@
     <v-main>
       <slot />
     </v-main>
-  </v-layout>
+  </v-app>
 </template>

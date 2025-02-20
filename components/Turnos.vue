@@ -40,7 +40,7 @@ function onScroll(evt: WheelEvent) {
 #turnos {
   grid-template-columns: repeat(
     v-bind("lenTurnos"),
-    min-content
+    minmax(min-content, 1fr)
   );
   grid-template-rows: 1.5em repeat(
       v-bind("lenWeek"),
