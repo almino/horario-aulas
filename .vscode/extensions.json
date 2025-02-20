@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "arrterian.nix-env-selector",
+    "denifer.mdi-vuetify-intellisense",
+    "esbenp.prettier-vscode",
+    "firefox-devtools.vscode-firefox-debug",
+    "lafe.contextualduplicate",
+    "sleistner.vscode-fileutils",
+    "usernamehw.errorlens",
+    "vue.volar",
+    "vuetifyjs.vuetify-vscode",
+    "wmaurer.change-case"
+  ]
+}
