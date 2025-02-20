@@ -22,9 +22,17 @@ export default defineNuxtPlugin((app) => {
       messages: { pt },
     },
     theme: {
+      defaultTheme: "light",
       themes: {
         light: {
           dark: false,
+          colors: {
+            primary: colors.teal.darken1, // #00897B
+            // secondary: colors.red.lighten4, // #FFCDD2
+          },
+        },
+        dark: {
+          dark: true,
           colors: {
             primary: colors.teal.darken1, // #00897B
             // secondary: colors.red.lighten4, // #FFCDD2
