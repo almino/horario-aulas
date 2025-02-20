@@ -11,7 +11,9 @@ const lenTurnos = ref(jsTurnos.length);
 const lenWeek = ref(luxon.lenWeek);
 
 function onScroll(evt: WheelEvent) {
-  elTurnos.value.scrollLeft += evt.deltaY;
+  if (elTurnos.value) {
+    elTurnos.value.scrollLeft += evt.deltaY;
+  }
 }
 </script>
 
