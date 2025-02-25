@@ -17,12 +17,12 @@ export default defineNuxtConfig({
         (config) => {
           // @ts-expect-error
           config.plugins.push(
-            vuetify({ autoImport: true })
+            vuetify({ autoImport: true }),
           );
-        }
+        },
       );
     },
-    //...
+    "@vite-pwa/nuxt",
   ],
   vite: {
     vue: {
