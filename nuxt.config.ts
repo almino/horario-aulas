@@ -24,6 +24,14 @@ export default defineNuxtConfig({
     },
     "@vite-pwa/nuxt",
   ],
+  runtimeConfig: {
+    public: {
+      // can be overridden by NUXT_PUBLIC_GUEST_CALENDAR environment variable
+      guestCalendar: "",
+      // can be overridden by NUXT_PUBLIC_GUEST_CALENDAR_AUTH environment variable
+      guestCalendarAuth: "",
+    },
+  },
   vite: {
     vue: {
       template: {

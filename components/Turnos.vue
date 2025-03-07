@@ -1,16 +1,19 @@
-<script lang="ts" setup>
+<script setup>
 import { ref, useTemplateRef } from "vue";
 import CabeçalhoTurnos from "./CabeçalhoTurnos.vue";
 
 const appConfig = useAppConfig();
+const { turnos: jsTurnos } = appConfig;
 const luxon = useLuxon();
+const events = fetchGuestCalendar(luxon.weekDays);
 
 const elTurnos = useTemplateRef("turnos");
-const jsTurnos = appConfig.turnos;
-const lenTurnos = ref(jsTurnos.length);
+const lenTurnos = ref(
+  Object.keys(jsTurnos).length,
+);
 const lenWeek = ref(luxon.lenWeek);
 
-function onScroll(evt: WheelEvent) {
+function onScroll(evt) {
   if (elTurnos.value) {
     elTurnos.value.scrollLeft += evt.deltaY;
   }

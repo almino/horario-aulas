@@ -1,9 +1,4 @@
-import {
-  DateTime,
-  Settings,
-  type WeekdayNumbers,
-  type WeekSettings,
-} from "luxon";
+import { type WeekSettings } from "luxon";
 
 export default defineAppConfig({
   formats: {
@@ -17,11 +12,17 @@ export default defineAppConfig({
       primary: "#ff0000",
     },
   },
-  turnos: [
-    "manhã",
-    "tarde",
+  turnos: {
+    manhã: [
+      { hour: 8, minute: 0 },
+      { hour: 11, minute: 0 },
+    ],
+    tarde: [
+      { hour: 14, minute: 0 },
+      { hour: 17, minute: 0 },
+    ],
     // "noite",
-  ],
+  },
   weekSettings: {
     firstDay: 7,
     minimalDays: 1,

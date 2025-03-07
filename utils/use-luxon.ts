@@ -20,7 +20,7 @@ export default function () {
 
   const firstDay = today.startOf("week");
   const dayNumber: WeekdayNumbers = parseInt(
-    today.toFormat(appConfig.formats.dayNumber)
+    today.toFormat(appConfig.formats.dayNumber),
   ) as WeekdayNumbers;
 
   if (weekSettings.weekend.includes(dayNumber)) {
@@ -32,7 +32,7 @@ export default function () {
   for (let i = 0; i < 7; i++) {
     let d = firstDay.plus({ days: i });
     let n = parseInt(
-      d.toFormat("c")
+      d.toFormat("c"),
     ) as WeekdayNumbers;
     if (weekSettings.weekend.includes(n))
       continue;

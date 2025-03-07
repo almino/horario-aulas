@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <v-container class="h-100 grid">
     <DiasSemanaRetrato />

@@ -6,10 +6,10 @@ const jsTurnos = appConfig.turnos;
 
 <template>
   <div
-    v-for="t in jsTurnos"
+    v-for="(t, k) in jsTurnos"
     class="font-weight-medium border-b-sm text-center header"
     :style="{ alignSelf: 'end' }"
   >
-    {{ t }}
+    {{ k }}
   </div>
 </template>

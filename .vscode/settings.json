@@ -1,4 +1,7 @@
 {
   "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
-  "prettier.trailingComma": "all"
+  "prettier.trailingComma": "all",
+  "nuxtr.defaultPackageManager": "Bun",
+  "nuxtr.vueFiles.script.defaultLanguage": "js",
+  "nuxtr.vueFiles.style.alwaysScoped": true
 }
