@@ -39,10 +39,14 @@ export default function () {
     weekDays.push(d);
   }
 
+  const weekDaysRef = reactive(weekDays);
+
   return {
-    firstDay,
-    lenWeek: weekDays.length,
+    firstDay: ref(firstDay),
+    lenWeek: computed(
+      () => weekDaysRef.length,
+    ),
     today,
-    weekDays,
+    weekDays: weekDaysRef,
   };
 }

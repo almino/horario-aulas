@@ -4,11 +4,12 @@ import { computed } from "vue";
 
 const luxon = useLuxon();
 
-const days: DateTime[] = luxon.weekDays;
+const days = luxon.weekDays;
 
 const title = computed(() => {
+  // console.log(days[0]);return;
   let ini = days[0];
-  let end = days[days.length - 1];
+  let end = days[luxon.lenWeek.value - 1];
 
   if (ini.year != end.year) {
     return `${ini.toFormat("D")} a

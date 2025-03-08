@@ -5,7 +5,9 @@ import CabeçalhoTurnos from "./CabeçalhoTurnos.vue";
 const appConfig = useAppConfig();
 const { turnos: jsTurnos } = appConfig;
 const luxon = useLuxon();
-const events = fetchGuestCalendar(luxon.weekDays);
+const events = await fetchGuestCalendar(
+  luxon.weekDays,
+);
 
 const elTurnos = useTemplateRef("turnos");
 const lenTurnos = ref(
@@ -28,16 +30,16 @@ function onScroll(evt) {
     @wheel.prevent="onScroll"
   >
     <CabeçalhoTurnos />
-    <div>APS1</div>
-    <div>DHP1</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
-    <div>Genitourinário</div>
+    <div v-for="evs in events">
+      <template v-if="evs.length">
+        <span v-for="ev in evs">
+          {{ ev.summary }}
+        </span>
+      </template>
+      <span v-else>
+        {{ appConfig.noEvent }}
+      </span>
+    </div>
   </div>
 </template>
 

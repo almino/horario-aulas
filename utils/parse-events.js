@@ -11,7 +11,7 @@ export default (iCal) => {
   // console.log("Vevents:", vevents);
 
   const events = vevents.map((vevent) => {
-    return new ICAL.Event(vevent.jCal);
+    return new ICAL.Event(vevent);
   });
 
   return events;

@@ -4,8 +4,8 @@ import { ref } from "vue";
 
 const luxon = useLuxon();
 
-const days: DateTime[] = luxon.weekDays;
-const lenWeek = ref(luxon.lenWeek);
+const days = luxon.weekDays;
+const lenWeek = luxon.lenWeek;
 </script>
 
 <template>

@@ -5,6 +5,7 @@ export default defineAppConfig({
     dayNumber: "c",
   },
   locale: "pt-BR",
+  noEvent: "Sem aula",
   title: "Mio Tem",
   theme: {
     dark: true,
