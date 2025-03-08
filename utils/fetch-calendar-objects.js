@@ -15,7 +15,7 @@ export default async (url, auth, params = {}) => {
       },
       ...params,
     });
-    console.log("Calendar objects:", objs);
+    // console.log("Calendar objects:", objs);
 
     return objs;
   } catch (e) {

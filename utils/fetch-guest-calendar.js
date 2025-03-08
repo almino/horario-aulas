@@ -35,7 +35,14 @@ export default async function (weekDays) {
           },
         );
 
-        events.push(objs);
+        if (objs.length > 0) {
+          let parsedEvents = objs.map((obj) => {
+            return parseEvents(obj.data);
+            // console.log("Parsed events:", parsed);
+            // return parsed;
+          });
+          events.push(...parsedEvents);
+        } else events.push(objs);
       }
     }
 
