@@ -35,7 +35,10 @@ export default async function (weekDays) {
           },
         );
 
-        if (objs.length > 0) {
+        if (
+          Array.isArray(objs) &&
+          objs.length > 0
+        ) {
           let parsedEvents = objs.map((obj) => {
             return parseEvents(obj.data);
             // console.log("Parsed events:", parsed);

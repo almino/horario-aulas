@@ -1,12 +1,17 @@
 <script setup>
 import { ref, useTemplateRef } from "vue";
 import CabeçalhoTurnos from "./CabeçalhoTurnos.vue";
+import fetchGuestCalendar from "~/utils/fetch-guest-calendar";
 
 const appConfig = useAppConfig();
 const { turnos: jsTurnos } = appConfig;
 const luxon = useLuxon();
 const events = await fetchGuestCalendar(
   luxon.weekDays,
+);
+const hasEvents = computed(
+  () =>
+    Array.isArray(events) && events.length > 0,
 );
 
 const elTurnos = useTemplateRef("turnos");
@@ -32,9 +37,7 @@ function onScroll(evt) {
     <CabeçalhoTurnos />
     <div v-for="evs in events">
       <template v-if="evs.length">
-        <span v-for="ev in evs">
-          {{ ev.summary }}
-        </span>
+        <Evento v-for="ev in evs" :data="ev" />
       </template>
       <span v-else>
         {{ appConfig.noEvent }}
